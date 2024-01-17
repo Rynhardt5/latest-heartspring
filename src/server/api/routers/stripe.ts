@@ -68,8 +68,8 @@ export const stripeRouter = createTRPCRouter({
     return productsWithPrices;
   }),
 
-  createProductAndPrice: publicProcedure.input({}).mutation(async () => {
-    createProductAndPrice();
-    return "";
-  }),
+  // createProductAndPrice: publicProcedure.input({}).mutation(async () => {
+  //   createProductAndPrice();
+  //   return "";
+  // }),
 });
