@@ -2,17 +2,13 @@
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 export default function AdminNav() {
@@ -23,9 +19,9 @@ export default function AdminNav() {
     return null;
   }
 
-  // if (sessionData?.user.role !== "admin") {
-  //   return null;
-  // }
+  if (sessionData?.user.role !== "admin") {
+    return null;
+  }
 
   const links = [
     {

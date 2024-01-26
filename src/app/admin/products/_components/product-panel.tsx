@@ -1,58 +1,47 @@
-// "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { SearchIcon } from "lucide-react";
+"use client";
 import React from "react";
-// import { DataTable } from "../../test-data-table";
-import { type Product, columns } from "../../product-column";
-import { api } from "@/trpc/server";
-import { DataTable } from "../../test-data-table";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { ProductForm } from "./product-form";
+import { columns } from "./product-column";
+import { api } from "@/trpc/react";
+import { DataTable } from "./product-data-table";
+import Loader from "@/components/common/loader";
+// import { useEvent } from "react-use";
 
-export default async function ProductPanel() {
-  const products = await api.stripe.getAllProductsAndPrices.query();
+export default function ProductPanel() {
+  // const utils = api.useUtils();
+  const { data: products, status } =
+    api.stripe.getAllProductsAndPrices.useQuery();
+  // const deleteAllProducts = api.stripe.deleteAllProducts.useMutation({
+  //   onSuccess: async () => {
+  //     await utils.stripe.getAllProductsAndPrices.invalidate();
+  //   },
+  // });
+  // const uploadPhoto = api.file.uploadFile.mutate({ filename: "test.png", file: })
+  // console.log(status);
+  // console.log(products);
 
   return (
     <div>
-      <div className="my-6 flex justify-between">
+      <div className="my-4 mb-0 flex justify-between">
         <h1 className="mb-0 text-2xl font-semibold">Products</h1>
-        <div className="flex gap-2">
-          <div className="relative">
-            <Input
-              className="w-[300px] pl-10"
-              placeholder="Search..."
-              // onChange={(e) => setSearch(e.target.value)}
-            />
-            <SearchIcon className="absolute left-2 top-2 h-6 w-6 text-foreground/60" />
-          </div>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button>Add Product</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Add a new product</DialogTitle>
-                {/* <DialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </DialogDescription> */}
-                <ProductForm />
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
 
-          {/* <NewProductModal /> */}
-        </div>
+        {/* <div className="flex gap-2">
+          <ProductForm />
+          {process.env.NODE_ENV === "development" && (
+            <Button
+              variant="destructive"
+              onClick={() => deleteAllProducts.mutate()}
+            >
+              Delete All Products
+            </Button>
+          )}
+
+        </div> */}
       </div>
-      <DataTable columns={columns} data={products} />
+      {status === "loading" ? (
+        <Loader fullScreen />
+      ) : (
+        products && <DataTable columns={columns} data={products} />
+      )}
     </div>
   );
 }

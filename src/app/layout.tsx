@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "HeartSpring",
+  title: "Heart Spring",
   description: "Pure water for pure living",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
@@ -37,7 +37,7 @@ export default function RootLayout({
           <TRPCReactProvider cookies={cookies().toString()}>
             <NextAuthProvider>
               <Navbar />
-              <main className="container">{children}</main>
+              <main className="container my-6">{children}</main>
               {/* // TODO footer */}
             </NextAuthProvider>
           </TRPCReactProvider>

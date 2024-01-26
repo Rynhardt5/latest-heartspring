@@ -24,9 +24,16 @@ export default function NavMenu() {
                 </NavigationMenuContent>
               </NavigationMenuItem> */}
         <NavigationMenuItem>
+          <Link href="/about" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              About
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
           <Link href="/shop" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Shop
+              Products
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

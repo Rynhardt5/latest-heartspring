@@ -35,7 +35,7 @@ export default function Debug({
   data,
   title = "",
 }: {
-  data: Record<string, unknown>[] | string;
+  data: Record<string, unknown>[] | Record<string, unknown> | string;
   title?: string;
 }) {
   if (process.env.NODE_ENV !== "development") {

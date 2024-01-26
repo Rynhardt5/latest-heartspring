@@ -7,9 +7,13 @@ import React from "react";
 export default function Loader({
   fullScreen,
   size,
+  text,
+  column,
 }: {
   fullScreen?: boolean;
   size?: "small" | "medium" | "large";
+  text?: string;
+  column?: boolean;
 }) {
   const sizes = {
     small: "h-6 w-6",
@@ -23,12 +27,13 @@ export default function Loader({
       className={cn("flex items-center justify-center space-x-2", {
         "fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0":
           fullScreen,
+        "flex-col gap-4": column,
       })}
     >
       <div role="status">
         <svg
           aria-hidden="true"
-          className={`${sizeClass} animate-spin fill-slate-600 text-gray-200 dark:text-gray-600`}
+          className={`${sizeClass} animate-spin fill-sky-500 text-gray-200 dark:text-gray-600`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +49,7 @@ export default function Loader({
         </svg>
         <span className="sr-only">Loading...</span>
       </div>
-      <div role="definition">Loading</div>
+      <div role="definition">{text ?? "Loading"}</div>
     </div>
   );
 }

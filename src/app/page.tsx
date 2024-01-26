@@ -1,19 +1,12 @@
-// import { CreatePost } from "@/app/_components/create-post";
 import Debug from "@/components/common/debug";
 import { getServerAuthSession } from "@/server/auth";
-import { api } from "@/trpc/server";
 
 export default async function Home() {
-  // const hello = await api.post.hello.query({ text: "from tRPC" });
-  const products = await api.stripe.getAllProductsAndPrices.query();
   const session = await getServerAuthSession();
 
   return (
     <div className="flex h-screen items-center justify-center">
       {session?.user && <Debug data={session?.user} title="- User" />}
-      <Debug data={products} title="- Products" />
-      {/* <pre>{JSON.stringify(session?.user, null, 2)}</pre>
-      <pre>{JSON.stringify(products, null, 2)}</pre> */}
     </div>
   );
 }

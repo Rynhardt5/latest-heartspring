@@ -6,27 +6,19 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Copy, CreditCard, Droplet } from "lucide-react";
+import { Droplet, User2 } from "lucide-react";
 import React, { useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { autoCapitalize, getInitials } from "@/lib/utils";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { set } from "zod";
 import LoginBox from "@/components/login-box";
 
 // get profile data from session
@@ -38,7 +30,7 @@ export default function ProfileButton() {
   const initals = sessionData?.user.name ? (
     getInitials(sessionData?.user.name)
   ) : (
-    <Droplet className="h-[1.2rem] w-[1.2rem]" />
+    <User2 className="h-5.5 w-5.5" />
   );
 
   function openDialog() {
@@ -54,7 +46,10 @@ export default function ProfileButton() {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar>
-            <AvatarImage src={sessionData?.user.image ?? ""} alt="@shadcn" />
+            <AvatarImage
+              src={sessionData?.user.image ?? ""}
+              alt="User profile image"
+            />
             <AvatarFallback>{initals}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
